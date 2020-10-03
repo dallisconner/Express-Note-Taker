@@ -11,4 +11,12 @@ app.use(express.json());
 
 app.listen(port, function() {
     console.log(`Application now listening on port ${port}.`);
-})
+});
+
+app.get("*", function(req, res) {
+    res.sendFile(path.join(mainDir, "index.html"));
+});
+
+app.get("/notes", function(req, res) {
+    res.sendFile(path.join(mainDir, "notes.html"));
+});
