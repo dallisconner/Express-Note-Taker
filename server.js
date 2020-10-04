@@ -3,7 +3,8 @@ const path = require("path");
 const fs = require("fs");
 
 const app = express();
-const port = 7777;
+const PORT = process.env.PORT || 7777;
+//const PORT = 7777;
 const mainDir = path.join(__dirname, "/public");
 
 app.use(express.static('public'));
@@ -23,7 +24,7 @@ app.get("/api/notes/:id", function(req, res) {
     res.json(savedNotes[Number(req.params.id)]);
 });
 
-app.get("*", function(req, res) {
+app.get("/", function(req, res) {
     res.sendFile(path.join(mainDir, "index.html"));
 });
 
@@ -57,6 +58,6 @@ app.delete("/api/notes/:id", function(req, res) {
     res.json(savedNotes);
 });
 
-app.listen(port, function() {
-    console.log(`Application now listening on port ${port}.`);
+app.listen(PORT, function() {
+    console.log(`Application now listening on port ${PORT}.`);
 });
